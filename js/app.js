@@ -18,7 +18,7 @@ $(document).ready(function() {
     var center = {
         lat: 47.6,
         lng: -122.3
-    }
+    };
 
     var map = new google.maps.Map(mapElem, {
         center: center,
@@ -45,10 +45,8 @@ $(document).ready(function() {
                 markers.push(marker);
 
                 google.maps.event.addListener(marker, 'click', function() {
-                    var picUrl = trafficCam.imageurl.url;
                     var html = '<h2>'+ trafficCam.cameralabel +'</h2>';
-                    html += '<img src="' + picUrl + '">';
-                    console.log(html);
+                    html += '<img src="' + trafficCam.imageurl.url + '">';
                     map.panTo(marker.getPosition(trafficCam));
                     infoWindow.setContent(html);
                     infoWindow.open(map, this);
@@ -62,10 +60,7 @@ $(document).ready(function() {
     $("#search").bind('search keyup', function(trafficCam) {
         trafficCams.forEach(function(trafficCam, index) {
             var label = trafficCam.cameralabel.toLowerCase();
-            console.log(label);
-            console.log($("input").val());
             var exists = label.indexOf($("input").val().toLowerCase());
-            console.log(exists);
             if (exists == -1) {
                 markers[index].setMap(null);
             } else {
